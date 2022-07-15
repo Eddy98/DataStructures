@@ -157,8 +157,7 @@ A linked list that has no clear head or tail, because its "tail" points to its "
 **Hash Table**
 
 A data structure that provides fast insertion, deletion, and lookup of key/value pairs. Under the hood, a hash table uses a dynamic array of linked lists to efficiently store key/value pairs. When inserting a key/value pair, a hash function first maps the key, which is typically a
-string (or any data that can be hashed, depending on the implementation of the hash table), to an integer value and, by extension, to an index in the underlying dynamic array. Then, the valueassociated with the key
-is added to the linked list stored at that index in the dynamic array, and a reference to the key is also stored with the value.
+string (or any data that can be hashed, depending on the implementation of the hash table), to an integer value and, by extension, to an index in the underlying dynamic array. Then, the value associated with the key is added to the linked list stored at that index in the dynamic array, and a reference to the key is also stored with the value.
 
 Hash tables rely on highly optimized hash functions to minimize the number of collisions that occur when storing values: cases where two keys map to the same index.
 
@@ -188,3 +187,171 @@ Looking up a key: O(1) on average; O(n) in the worse case
 
 The worst-case linear-time operations occur when a hash table experiences a lot of collisions, leading to long linked lists internally, which take O(n) time to traverse. However, in practice and especially in coding interviews, we typically assume that the hash
 functions employed by hash tables are so optimized that collisions are extremely rare and constant-time operations are all but guaranteed.
+
+## Graphs
+
+Notes: A graph is a collection of Nodes that may or may not be connected to each other. We call the nodes -> vertices, and the connections -> edges
+
+We say that a graph is **connected** if you can reach all the nodes from any node.
+
+We typically use an **adjacency list** to represent a graph in code. We can also use a 2D matrix
+
+```
+Space -> O(V + E)
+
+Time -> O(V + E)
+```
+
+**Graph**
+
+A collection of nodes or values called vertices that might be related; relations between vertices are called edges. Many things in life can be represented by graphs; for example, a social network can be
+represented by a graph whose vertices are users and whose edges are friendships between
+the users. Similarly, a city map can be represented by a graph whose vertices are locations
+in the city and whose edges are roads between the locations.
+
+**Graph Cycle**
+
+Simply put, a cycle occurs in a graph when three or more vertices in the graph are
+connected so as to form a closed loop. Note that the definition of a graph cycle is sometimes broadened to include cycles of length two or one; in the context of coding interviews, when dealing with questions that involve graph cycles, it's important to clarify what exactly constitutes a cycle.
+
+**Acyclic Graph**
+
+A graph that has no cycles.
+
+**Cyclic Graph**
+
+A graph that has at least one cycle.
+
+**Directed Graph**
+
+A graph whose edges are directed, meaning that they can only be traversed in one
+direction, which is specified. For example, a graph of airports and flights would likely be directed, since a flight specifically goes from one airport to another (i.e., it has a direction), without necessarily implying the presence of a flight in the opposite direction.
+
+**Undirected Graph**
+
+A graph whose edges are undirected, meaning that they can be traversed in both
+directions. For example, a graph of friends would likely be undirected, since a friendship is, by nature, bidirectional.
+
+**Connected Graph**
+A graph is connected if for every pair of vertices in the graph, there's a path of one or more
+edges connecting the given vertices. In the case of a directed graph, the graph is:
+
+- strongly connected if there are bidirectional connections between the vertices of every
+  pair of vertices (i.e., for every vertex-pair (u, v) you can reach v from u and u
+  from v )
+- weakly connected if there are connections (but not necessarily bidirectional ones)
+  between the vertices of every pair of vertices
+
+A graph that isn't connected is said to be disconnected.
+
+## Trees
+
+**Tree**
+
+A data structure that consists of nodes, each with some value and pointers to child-nodes,
+which recursively form subtrees in the tree.
+The first node in a tree is referred to as the root of the tree, while the nodes at the bottom
+of a tree (the nodes with no child-nodes) are referred to as leaf nodes or simply leaves. The
+paths between the root of a tree and its leaves are called branches, and the height of a tree
+is the length of its longest branch. The depth of a tree node is its distance from its tree's
+root; this is also known as the node's level in the tree.
+A tree is effectively a graph that's connected directed and acyclic that has an explicit
+root node, and whose nodes all have a single parent (except for the root node, which
+effectively has no parent). Note that in most implementations of trees, tree nodes don't
+have a pointer to their parent, but they can if desired.
+There are many types of trees and tree-like structures, including binary trees, heaps, and
+tries.
+Binary Tree
+A tree whose nodes have up to two child-nodes.
+The structure of a binary tree is such that many of its operations have a logarithmic time
+complexity, making the binary tree an incredibly attractive and commonly used data
+structure.
+
+K-ary Tree
+A tree whose nodes have up to k child-nodes. A binary tree is a k-ary tree where k == 2.
+Perfect Binary Tree
+A binary tree whose interior nodes all have two child-nodes and whose leaf nodes all have
+the same depth. Example:
+
+```
+          1
+       /    \
+      2      3
+     / \    / \
+    4   5   6   7
+   / \ / \ / \ / \
+   8 9 10 11 12 13 14 15
+```
+
+Complete Binary Tree
+A binary tree that's almost perfect; its interior nodes all have two child-nodes, but its leaf
+nodes don't necessarily all have the same depth. Furthermore, the nodes in the last level of
+a complete binary tree are as far left as possible. Example:
+
+```
+         1
+        / \
+        2 3
+      / \ / \
+      4 5 6 7
+     / \
+     8 9
+```
+
+Conversely, the following binary tree isn't complete, because the nodes in its last level aren't
+as far left as possible:
+
+```
+        1
+       / \
+       2 3
+     / \ / \
+     4 5 6 7
+       / \
+      8   9
+```
+
+Balanced Binary Tree
+
+A binary tree whose nodes all have left and right subtrees whose heights differ by no
+more than 1. A balanced binary tree is such that the logarithmic time complexity of its operations is
+maintained. For example, inserting a node at the bottom of the following imbalanced binary tree's left
+subtree would clearly not be a logarithmic-time operation, since it would involve traversing
+through most of the tree's nodes:
+
+```
+    1
+   / \
+   2 3
+  /
+ 4
+ /
+ 8
+ /
+10
+```
+
+The following is an example of a balanced binary tree:
+
+```
+    1
+   / \
+   2 3
+ / \ / \
+ 4 5 6 7
+ / \   /
+10 9  8
+```
+
+Full Binary Tree
+A binary tree whose nodes all have either two child-nodes or zero child-nodes. Example:
+
+```
+  1
+ /   \
+2    3
+    / \
+    6  7
+   / \
+   8 9
+```
